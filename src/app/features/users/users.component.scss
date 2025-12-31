@@ -1,0 +1,95 @@
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; 
+  font-family: Arial, sans-serif;
+  background: #fff;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+
+  white-space: nowrap;
+}
+
+td img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+td:nth-child(2),
+td:nth-child(3) {
+  white-space: normal;      
+  word-break: break-word; 
+}
+
+td button {
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+$primary: #007bff;
+$primary-hover: #0056b3;
+$secondary: #6c757d;
+$secondary-hover: #565e64;
+
+.search-container {
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;   // enables automatic responsiveness
+  align-items: center;
+  gap: 12px;
+
+  input {
+    flex: 1 1 250px;  // grows, shrinks, and wraps when needed
+    min-width: 200px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+
+  button {
+    flex: 0 1 auto; // allows wrapping but keeps natural size
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+
+    &:first-of-type {
+      background: $secondary;
+      &:hover {
+        background: $secondary-hover;
+      }
+    }
+
+    &:last-of-type {
+      background: $primary;
+      &:hover {
+        background: $primary-hover;
+      }
+    }
+  }
+}
+.table-wrapper {
+  max-height: calc(100vh - 180px); 
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+
+
+table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+}

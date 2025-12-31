@@ -1,0 +1,55 @@
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Search by name, email, or role"
+    [ngModel]="searchText()"
+    (ngModelChange)="onSearchChange($event)"
+  />
+
+  <button (click)="resetFilter()">Reset</button>
+  <button (click)="addUser()">Add</button>
+</div>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Role</th>
+        <th>Avatar</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let u of paginatedUsers()">
+        <td>{{ u.id }}</td>
+        <td>{{ u.name }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.password }}</td>
+        <td>{{ u.role }}</td>
+        <td>
+          <img [src]="u.avatar" width="40" />
+        </td>
+        <td>
+          <button (click)="editUser(u.id)">Edit</button> |
+          <button (click)="deleteUser(u.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card flex justify-center">
+  <p-paginator
+    [first]="first()"
+    [rows]="rows()"
+    [totalRecords]="filteredUsers().length"
+    [rowsPerPageOptions]="[5, 10, 20, 30]"
+    (onPageChange)="onPageChange($event)"
+  >
+  </p-paginator>
+</div>

@@ -1,0 +1,36 @@
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20; 
+  display: flex;
+  gap: 20px;
+  background-color: #5965b0;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+
+.right-group {
+  margin-left: auto;  
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #cfd8dc;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+nav a:hover {
+  background-color: #727ab2;
+  color: #ffffff;
+}
+
+nav a.active {
+  background-color: #3949ab;
+  color: #ffffff;
+}

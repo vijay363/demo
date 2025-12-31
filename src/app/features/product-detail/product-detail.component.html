@@ -1,0 +1,24 @@
+<div *ngIf="loading" class="loading">Loading product...</div>
+
+<button *ngIf="!loading" class="back-btn" (click)="goBack()">
+  ← Back to Products
+</button>
+
+<div *ngIf="!loading && product" class="product-details">
+  <div class="product-content">
+    <div class="image-gallery">
+      <img
+        *ngFor="let img of product.images"
+        [src]="img"
+        alt="{{ product.title }}"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="product-info">
+      <h2>{{ product.title }}</h2>
+      <p class="price">${{ product.price }}</p>
+      <p class="description">{{ product.description }}</p>
+    </div>
+  </div>
+</div>

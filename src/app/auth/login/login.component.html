@@ -1,0 +1,46 @@
+<div class="login-container">
+  <h2>Welcome Back</h2>
+  <p class="subtitle">Please log in to your account</p>
+
+  <form (submit)="login($event)" class="login-form">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="text"
+        name="email"
+        placeholder="you@example.com"
+        [(ngModel)]="email"
+        required
+      />
+    </div>
+
+    <div class="form-group password-group">
+      <label for="password">Password</label>
+
+      <div class="password-wrapper">
+        <input
+          id="password"
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          placeholder="••••••••"
+          [(ngModel)]="password"
+          required
+        />
+
+        <span class="toggle-icon" (click)="showPassword = !showPassword">
+          <i
+            class="fa"
+            [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+          ></i>
+        </span>
+      </div>
+    </div>
+
+    <button type="submit">Log In</button>
+  </form>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+</div>

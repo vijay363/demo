@@ -1,0 +1,13 @@
+<div>
+  <input type="text" [(ngModel)]="offset" placeholder="offset" />
+  <input type="text" [(ngModel)]="limit" placeholder="limit" />
+</div>
+
+<button (click)="articles = []">clear all articles</button> |
+<button (click)="loadArticles()">Load articles</button>
+@for (article of articles; track article.id) {
+<div>
+  <h2>{{ article.title }}</h2>
+  <p>{{ article.body }}</p>
+</div>
+}

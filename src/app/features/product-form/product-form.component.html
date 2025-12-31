@@ -1,0 +1,79 @@
+<button *ngIf="!loading" class="back-btn" (click)="goBack()">
+  ← Back to Products
+</button>
+<h2 class="form-title">
+  {{ isEdit ? 'Edit Product' : 'Create Product' }}
+</h2>
+
+<form class="product-form" [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="form-group">
+    <label>Title</label>
+    <input formControlName="title" placeholder="Product title" />
+  </div>
+
+  <div class="form-group">
+    <label>Price</label>
+    <input type="number" formControlName="price" placeholder="Price" />
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+    <textarea
+      formControlName="description"
+      placeholder="Product description"
+      rows="4"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Category</label>
+    <select formControlName="categoryId">
+      <option value="">Select Category</option>
+      <option *ngFor="let c of categories" [value]="c.id">
+        {{ c.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+  <label>Images</label>
+
+  <div formArrayName="images" class="images-list">
+    <div
+      *ngFor="let img of images.controls; let i = index"
+      class="image-row"
+    >
+      <input
+        [formControlName]="i"
+        placeholder="Image URL"
+      />
+
+      <img
+        *ngIf="img.value"
+        [src]="img.value"
+        class="thumb"
+        alt="Preview"
+      />
+
+      <button
+        type="button"
+        class="remove-btn"
+        (click)="removeImage(i)"
+      >
+        ✖
+      </button>
+    </div>
+  </div>
+
+  <button type="button" class="add-img-btn" (click)="addImage('')">
+     Add Image
+  </button>
+</div>
+
+
+  <button type="submit" class="submit-btn" [disabled]="loading">
+    {{ isEdit ? 'Update Product' : 'Create Product' }}
+  </button>
+
+</form>

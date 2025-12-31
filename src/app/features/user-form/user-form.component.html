@@ -1,0 +1,31 @@
+<h2>{{ userId ? "Edit User" : "Add User" }}</h2>
+
+<div class="form-container">
+  <form [formGroup]="userForm" (ngSubmit)="saveUser()">
+    <label>Email:</label>
+    <input formControlName="email" />
+
+    <label>Name:</label>
+    <input formControlName="name" />
+
+    <label>Password:</label>
+    <input formControlName="password" />
+
+    <label>Role:</label>
+    <select formControlName="role">
+      <option value="customer">Customer</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    <label>Avatar URL:</label>
+    <input
+      formControlName="avatar"
+      placeholder="https://example.com/avatar.jpg"
+    />
+
+    <label>Or Upload Avatar:</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+
+    <button type="submit">{{ userId ? "Update" : "Add" }}</button>
+  </form>
+</div>
