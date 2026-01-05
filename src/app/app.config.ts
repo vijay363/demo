@@ -3,15 +3,18 @@ import { PreloadAllModules, provideRouter, withPreloading } from '@angular/route
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './auth/auth.interceptor';
-import { cacheInterceptor } from './core/cache/cache.interceptor';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
-import { initAuthFactory } from './auth/auth.initializer';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './auth/services/auth.service';
+import { loaderInterceptor } from './core/cache/http/loader.interceptor';
+import { ThemeService } from './core/cache/services/theme.service';
+import { initThemeFactory } from './core/cache/initializers/theme.initializer';
+import { authInterceptor } from './auth/interceptors/auth.interceptor';
+import { initAuthFactory } from './auth/initializers/auth.initializer';
+import { cacheInterceptor } from './core/cache/cache/cache.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -20,7 +23,7 @@ export const appConfig: ApplicationConfig = {
 
     provideRouter(routes, withPreloading(PreloadAllModules)),
 
-    provideHttpClient(withInterceptors([authInterceptor, cacheInterceptor])),
+    provideHttpClient(withInterceptors([loaderInterceptor, authInterceptor,cacheInterceptor])),
 
     providePrimeNG({
       theme: {
@@ -38,11 +41,16 @@ export const appConfig: ApplicationConfig = {
       preventDuplicates: true,
     }),
 
-    // ✅ ADD THIS BLOCK
     {
       provide: APP_INITIALIZER,
       useFactory: initAuthFactory,
       deps: [AuthService],
+      multi: true,
+    },
+      {
+      provide: APP_INITIALIZER,
+      useFactory: initThemeFactory,
+      deps: [ThemeService],
       multi: true,
     },
   ],

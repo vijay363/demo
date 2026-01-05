@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
-import { authGuard } from './auth/auth.guard';
-import { roleGuard } from './auth/role.guard';
-import { ProductFormComponent } from './features/product-form/product-form.component';
+import { roleGuard } from './auth/guards/role.guard';
+import { authGuard } from './auth/guards/auth.guard';
+import { ProductFormComponent } from './features/products/product-form/product-form.component';
 
 export const routes: Routes = [
   {
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'product',
     loadChildren: () =>
-      import('./features/product/product.routes').then((m) => m.PRODUCT_ROUTES),
+      import('./features/products/product.routes').then((m) => m.PRODUCT_ROUTES),
   },
 
   {
@@ -31,7 +31,7 @@ export const routes: Routes = [
   {
     path: 'users',
     loadChildren: () =>
-      import('./features/users/users.routes').then((m) => m.USERS_ROUTES),
+      import('./features/user/users.routes').then((m) => m.USERS_ROUTES),
   },
   {
     path: 'admin',

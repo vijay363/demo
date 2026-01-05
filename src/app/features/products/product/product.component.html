@@ -1,0 +1,73 @@
+<div class="filter-bar">
+  <input
+    placeholder="Search..."
+    [(ngModel)]="filters.title"
+    (input)="resetAndReload()"
+  />
+
+  <select [(ngModel)]="filters.categoryId" (change)="resetAndReload()">
+    <option [ngValue]="null">All Categories</option>
+    <option *ngFor="let c of categories" [ngValue]="c.id">
+      {{ c.name }}
+    </option>
+  </select>
+
+<input
+  type="number"
+  placeholder="Min Price"
+  (input)="onMinPrice($any($event.target).value)"
+/>
+
+<input
+  type="number"
+  placeholder="Max Price"
+  (input)="onMaxPrice($any($event.target).value)"
+/>
+
+  <select [(ngModel)]="sortType" (change)="resetAndReload()">
+    <option [ngValue]="null">Sort</option>
+    <option value="priceAsc">Price ↑</option>
+    <option value="priceDesc">Price ↓</option>
+  </select>
+
+  <button (click)="resetFilters()">Reset</button>
+
+  <div class="admin-actions" *ngIf="isAdmin">
+    <button routerLink="/admin/products/new">Add Product</button>
+  </div>
+</div>
+
+<div class="product-grid">
+  <div
+    *ngFor="let product of products; trackBy: trackById"
+    class="product-card"
+  >
+    <a [routerLink]="['/product', product.slug]">{{ product.title }}</a>
+
+    <p>${{ product.price }}</p>
+
+    <div class="image-slider" *ngIf="product.images.length">
+      <img [src]="product.images[product.currentImageIndex || 0]" />
+
+      <button *ngIf="product.images.length > 1" (click)="prevImage(product)">
+        ‹
+      </button>
+      <button *ngIf="product.images.length > 1" (click)="nextImage(product)">
+        ›
+      </button>
+    </div>
+
+    <button
+      *ngIf="isAdmin"
+      [routerLink]="['/admin/products', product.id, 'edit']"
+    >
+      Edit
+    </button>
+    <button *ngIf="isAdmin" (click)="deleteProduct(product.id)">Delete</button>
+  </div>
+</div>
+
+<div #anchor></div>
+
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="!hasMore">No more products</div>

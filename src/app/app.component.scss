@@ -1,10 +1,10 @@
 nav {
   position: sticky;
   top: 0;
-  z-index: 20; 
+  z-index: 20;
   display: flex;
   gap: 20px;
-  background-color: #5965b0;
+  background-color: var(--nav-bg);
   padding: 10px 20px;
   border-radius: 8px;
 }
@@ -18,19 +18,24 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: #cfd8dc;
+  color: var(--nav-text);
   padding: 8px 15px;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
   font-weight: 500;
 }
 
 nav a:hover {
-  background-color: #727ab2;
-  color: #ffffff;
+  background-color: var(--nav-bg-hover);
+  color: var(--nav-text-active);
 }
 
 nav a.active {
-  background-color: #3949ab;
-  color: #ffffff;
+  background-color: var(--nav-bg-active);
+  color: var(--nav-text-active);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
 }

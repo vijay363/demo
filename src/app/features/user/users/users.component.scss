@@ -1,0 +1,119 @@
+:host {
+  display: block;
+  background: var(--page-bg);
+}
+.search-container {
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+
+  input {
+    flex: 1 1 250px;
+    min-width: 200px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 15px;
+    background: var(--surface-bg);
+    color: var(--text-primary);
+  }
+
+  button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  button:first-of-type {
+    background: var(--secondary);
+  }
+
+  button:first-of-type:hover {
+    background: var(--secondary-hover);
+  }
+
+  button:last-of-type {
+    background: var(--primary);
+  }
+
+  button:last-of-type:hover {
+    background: var(--primary-hover);
+  }
+}
+.table-wrapper {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+td:nth-child(2),
+td:nth-child(3) {
+  white-space: normal;
+  word-break: break-word;
+}
+
+table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface-bg);
+  z-index: 2;
+}
+
+
+td img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+}
+
+
+td button {
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+}
+
+td button:first-of-type {
+  background: var(--primary);
+  color: #fff;
+}
+
+td button:first-of-type:hover {
+  background: var(--primary-hover);
+}
+
+td button:last-of-type {
+  background: var(--danger);
+  color: #fff;
+}
+
+td button:last-of-type:hover {
+  background: var(--danger-hover);
+}

@@ -1,4 +1,5 @@
 <div>
+  <app-global-loader></app-global-loader>
   <nav *ngIf="authService.isLoggedIn()">
     <a
       routerLink="/"
@@ -15,6 +16,16 @@
     >
 
     <div class="right-group">
+      <select
+        class="form-select form-select-sm"
+        style="width: 120px"
+        [(ngModel)]="selectedTheme"
+        (change)="changeTheme(selectedTheme)"
+      >
+        <option *ngFor="let t of themes" [value]="t.value">
+          {{ t.label }}
+        </option>
+      </select>
       <a routerLink="/add" routerLinkActive="active">Add</a>
       <a routerLink="/profile" routerLinkActive="active">Profile</a>
       <a (click)="logout()" routerLinkActive="active">Logout</a>

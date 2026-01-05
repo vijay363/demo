@@ -1,3 +1,85 @@
+html.light {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: var(--page-bg);
+}
+
+:root,
+:root.light {
+  --page-bg: #f7f7f9;
+  --surface-bg: #ffffff;
+  --card-bg: #ffffff;
+
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+
+  --border-color: #e5e7eb;
+
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+
+  --success: #16a34a;
+
+  --muted-bg: #f1f3f4;
+  --muted-bg-hover: #e8eaed;
+
+  --disabled-bg: #d1d5db;
+  --disabled-text: #9ca3af;
+
+  --nav-bg: #5965b0;
+  --nav-bg-hover: #727ab2;
+  --nav-bg-active: #3949ab;
+
+  --nav-text: #cfd8dc;
+  --nav-text-active: #ffffff;
+}
+
+:root.dark {
+  --page-bg: #020617;
+  --surface-bg: #0b1220;
+  --card-bg: #111827;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+
+  --primary: #6366f1;
+  --primary-hover: #818cf8;
+
+  --success: #22c55e;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+
+  --muted-bg: #0b1220;
+  --muted-bg-hover: #1e293b;
+
+  --disabled-bg: #1e293b;
+  --disabled-text: #64748b;
+
+  --nav-bg: rgba(2, 6, 23, 0.85);
+  --nav-bg-hover: #111827;
+  --nav-bg-active: #1e293b;
+
+  --nav-text: #c7d2fe;
+  --nav-text-active: #ffffff;
+}
+
+* {
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease;
+}
+
 /* Top-right positioning */
 .toast-top-right {
   top: 20px !important;
@@ -38,4 +120,34 @@
 .toast-warning {
   background: linear-gradient(135deg, #ffa000, #f57c00) !important;
   color: white !important;
+}
+
+html.light .p-paginator {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+html.light .p-paginator button {
+  color: var(--text-primary);
+}
+
+html.light .p-paginator button:enabled:hover {
+  background: var(--muted-bg);
+}
+
+html.light .p-paginator .p-paginator-pages .p-paginator-page {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+html.light .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: var(--primary);
+  color: #fff;
+}
+
+html.dark .p-paginator {
+  background: var(--card-bg);
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }

@@ -1,12 +1,12 @@
-<div *ngIf="user">
+<div class="profile-page" *ngIf="user; else loading">
   <h2>Welcome, {{ user.name }}!</h2>
 
-  <img [src]="user.avatar" alt="User Avatar" />
+  <img [src]="user.avatar" alt="User Avatar" class="avatar" />
 
-  <p>Email: {{ user.email }}</p>
-  <p>Role: {{ user.role }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Role:</strong> {{ user.role }}</p>
 </div>
 
-<div *ngIf="!user">
-  <p>Loading user profile...</p>
-</div>
+<ng-template #loading>
+  <p class="loading">Loading user profile...</p>
+</ng-template>

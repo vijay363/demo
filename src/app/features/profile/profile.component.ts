@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { CommonService } from '../../shared/common.service';
+import { CommonService } from '../../shared/services/common.service';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile',
@@ -11,18 +12,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  authService = inject(AuthService);
+ private authService = inject(AuthService);
+private http = inject(HttpClient);
+
   user?: any;
-  http = inject(HttpClient);
 
   constructor(private commonService: CommonService) {
-    this.authService.getCurrentAuthUser().subscribe({
-      next: (r) => {
-        this.user = r;
-      },
-      error: (err) => {
-        console.error('Failed to load profile', err);
-      },
-    });
+   this.authService.currentUser$
+      .pipe(takeUntilDestroyed())
+      .subscribe(user => {
+        this.user = user;
+      });
   }
 }

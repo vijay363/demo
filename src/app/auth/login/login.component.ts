@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../../core/cache/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private toast = inject(ToastService);
   showPassword: boolean = false;
 
   login(event: Event) {
@@ -43,11 +45,16 @@ export class LoginComponent {
                 this.router.navigate(['/product']);
               }
             },
-            error: () => this.router.navigate(['/product']),
+            error: () => {
+              this.toast.warning('Logged in, but failed to load profile');
+              this.router.navigate(['/product']);
+            },
           });
         },
         error: (err) => {
-          this.error = err?.error?.message || 'Login failed';
+          const message = err?.error?.message || 'Login failed';
+          this.toast.error(message);
+          this.error = message;
         },
       });
   }
