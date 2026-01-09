@@ -1,0 +1,34 @@
+<div class="signature-page">
+  <div class="signature-list">
+    <h3 class="page-title">Saved Signatures</h3>
+
+    <div class="signature-grid">
+      <div class="card" *ngFor="let s of signatures">
+        <img [src]="s.signature.signature" />
+
+        <small>
+          {{ s.updatedAt ? "Updated:" : "Created:" }}
+          {{ s.updatedAt || s.createdAt | date : "short" }}
+        </small>
+
+        <div class="actions">
+          <button class="btn btn-outline-primary" (click)="openEdit(s.id)">
+            Edit
+          </button>
+          <button class="btn btn-outline-danger" (click)="delete(s.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="fab" (click)="openAdd()">+</button>
+</div>
+
+<app-signature
+  *ngIf="showModal"
+  [id]="selectedId"
+  (closed)="onModalClose($event)"
+>
+</app-signature>

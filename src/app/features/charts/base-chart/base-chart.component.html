@@ -1,0 +1,14 @@
+<div class="chart-card">
+  <div class="chart-header">
+    <h3>{{ title }}</h3>
+    <button (click)="reload()" [disabled]="loading">
+      <span *ngIf="!loading">🔄</span>
+      <span *ngIf="loading" class="spinner"></span>
+    </button>
+  </div>
+
+  <div class="chart-body">
+    <div *ngIf="loading" class="skeleton"></div>
+    <canvas #canvas [class.hidden]="loading"></canvas>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="modal fade show d-block" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ id ? "Edit Signature" : "Add Signature" }}
+        </h5>
+        <button type="button" class="btn-close" (click)="close()"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="activeTab === 'draw'" (click)="switchTab('draw')">
+              ✍️ Draw
+            </button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="activeTab === 'font'" (click)="switchTab('font')">
+              🔤 Font
+            </button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="activeTab === 'image'" (click)="switchTab('image')">
+              🖼️ Image
+            </button>
+          </li>
+        </ul>
+
+        <div *ngIf="activeTab === 'draw'" class="text-center">
+          <canvas #canvas width="500" height="220" class="border w-100">
+          </canvas>
+        </div>
+
+        <div *ngIf="activeTab === 'font'" class="text-center text-muted">
+          <div *ngIf="activeTab === 'font'" class="text-center">
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Enter your name" [(ngModel)]="fontText"
+                (input)="renderFontPreview()" />
+            </div>
+
+            <div class="mb-3">
+              <select class="form-select" [(ngModel)]="fontFamily" (change)="renderFontPreview()">
+                <option *ngFor="let f of fonts" [value]="f">
+                  {{ f }}
+                </option>
+              </select>
+            </div>
+
+            <div class="border p-3 mb-3">
+              <span [style.font-family]="fontFamily" style="font-size: 42px">
+                {{ fontText || "Preview Signature" }}
+              </span>
+            </div>
+
+            <canvas #fontCanvas width="500" height="220" hidden> </canvas>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab === 'image'" class="text-center text-muted">
+          <div *ngIf="activeTab === 'image'" class="text-center">
+            <input type="file" accept="image/png,image/jpeg" class="form-control mb-3"
+              (change)="onImageSelect($event)" />
+
+            <div *ngIf="imageError" class="text-danger mb-2">
+              {{ imageError }}
+            </div>
+
+            <div *ngIf="imageDataUrl" class="border p-3 mb-3">
+              <img [src]="imageDataUrl" class="img-fluid" style="max-height: 200px" />
+            </div>
+
+            <div *ngIf="!imageDataUrl" class="text-muted">
+              Upload a PNG or JPG signature image
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="clear()" [disabled]="activeTab !== 'draw'">
+          Clear
+        </button>
+
+        <button class="btn btn-outline-secondary" (click)="close()">
+          Cancel
+        </button>
+
+        <button class="btn btn-primary" (click)="save()">
+          {{ id ? "Update" : "Save" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop fade show"></div>

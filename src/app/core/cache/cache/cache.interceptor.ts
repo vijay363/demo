@@ -18,9 +18,9 @@ export const cacheInterceptor: HttpInterceptorFn = (req, next) => {
 
   const role = authService.getDecodedToken()?.role;
 
-  if (req.url.includes('/users') && role !== 'admin') {
-    return next(req);
-  }
+  // if (req.url.includes('/users') && role !== 'admin') {
+  //   return next(req);
+  // }
 
   const userKey = authService.getDecodedToken()?.sub ?? 'guest';
 

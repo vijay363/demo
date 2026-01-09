@@ -34,6 +34,16 @@ export const routes: Routes = [
       import('./features/user/users.routes').then((m) => m.USERS_ROUTES),
   },
   {
+    path: 'charts',
+    loadChildren: () =>
+      import('./features/charts/chart.routes').then((m) => m.CHART_ROUTES),
+  },
+     {
+    path: 'signatures',
+    loadChildren: () =>
+      import('./features/signatures/signatures.routes').then((m) => m.SIGNATURES_ROUTES),
+  },
+  {
     path: 'admin',
     canActivate: [authGuard, roleGuard],
     data: { roles: ['admin'] },
